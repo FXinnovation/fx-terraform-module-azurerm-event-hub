@@ -59,6 +59,14 @@ See `examples` folders for usage of this module.
 
 | Name | Description |
 |------|-------------|
+| event\_hub\_ids | IDs of the event hub. |
+| event\_hub\_partition\_ids | Identifiers for partitions created for the eventhub. |
+| eventhub\_authorization\_rule\_ids | IDs of the eventhub authorization rules. |
+| eventhub\_authorization\_rule\_primary\_connection string | The primary connection string for the authorization rules. |
+| eventhub\_authorization\_rule\_primary\_key | The primary keys for the authorization rules. |
+| eventhub\_authorization\_rule\_secondary\_connection string | The secondary connection string for the authorization rules. |
+| eventhub\_authorization\_rule\_secondary\_key | The secondary keys for the authorization rules. |
+| eventhub\_consumer\_group\_ids | IDs of the eventhub consumer group. |
 | eventhub\_namespace\_id | The ID of the event hub namespace. |
 | namesapce\_authorization\_rule\_ids | IDs of the namespace authorization rules. |
 | namesapce\_authorization\_rule\_primary\_connection string | The primary connection string for the authorization rules. |

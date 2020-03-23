@@ -117,7 +117,7 @@ resource "azurerm_eventhub_authorization_rule" "this_rule" {
 # Event-hub consumer group
 ###
 
-resource "azurerm_eventhub_consumer_group" "name" {
+resource "azurerm_eventhub_consumer_group" "this" {
   count = local.should_create_consumer_group ? length(var.consumer_group_names) : 0
 
   name                = element(var.consumer_group_names, count.index)
