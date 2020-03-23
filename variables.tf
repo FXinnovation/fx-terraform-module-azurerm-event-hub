@@ -21,6 +21,11 @@ variable "tags" {
 # Event-hub namespace
 ###
 
+variable "event_hub_namespace_enabled" {
+  description = "Boolean flag which describes whether or not enable the eventhub namespace."
+  default     = false
+}
+
 variable "eventhub_namespace_name" {
   description = "Specifies the name of the EventHub Namespace resource. Changing this forces a new resource to be created. If enabled values is `REQUIRED`."
   type        = string
@@ -156,4 +161,96 @@ variable "capture_description_size_in_bytes" {
   description = "List of amount of data built up in your EventHub before a Capture Operation occurs. Value should be between `10485760` and `524288000` bytes. Defaults to `314572800` bytes."
   type        = list(number)
   default     = [314572800]
+}
+
+variable "destination_names" {
+  description = "The list of names of  the Destination where the capture should take place. At this time the only supported value is `EventHubArchive.AzureBlockBlob`. If the `destination` is blocke is enabled value is `Required`."
+  type        = list(string)
+  default     = ["EventHubArchive.AzureBlockBlob"]
+}
+
+variable "destination_archive_name_formats" {
+  description = "The list of The Blob naming convention for archiving. e.g. `{Namespace}/{EventHub}/{PartitionId}/{Year}/{Month}/{Day}/{Hour}/{Minute}/{Second}`. Here all the parameters (Namespace,EventHub .. etc) are mandatory irrespective of order"
+  type        = list(string)
+  default     = [""]
+}
+
+variable "destination_blob_container_names" {
+  description = "The list of names of the conatianers within the blob storage account where message should be archived. If the `destination` block is enabled this value is `Required`."
+  type        = list(string)
+  default     = [""]
+}
+
+variable "destination_storage_account_ids" {
+  description = "The list of IDs of the blob storage account where messages should be archived.If the `destination` block is enabled this value is `Required`."
+  type        = list(string)
+  default     = [""]
+}
+
+###
+# Event-hub authorization rules
+###
+
+variable "eventhub_authorization_rule_enabled" {
+  description = "The boolean flag which describes whether to enable the authorization rule for the eventhub or not."
+  type        = bool
+  default     = false
+}
+
+variable "eventhub_authorization_rule_names" {
+  description = "List of names of the eventhub authorization rule resource. Changing this forces a new resource to be created. If the rsource is enabled the Value is `Required`."
+  type        = list(string)
+  default     = [""]
+}
+
+variable "authorization_rule_event_hub_names" {
+  description = "The list of names of the eventhubs to which this authorization rule will be associated. If enabled the value is `Requied`."
+  type        = list(string)
+  default     = [""]
+}
+
+variable "eventhub_authorization_rule_listen" {
+  description = "List of boolean flag which describes the authorization rule have permissions to listen to eventhub? Defaults to `false`."
+  type        = list(bool)
+  default     = [false]
+}
+
+variable "eventhub_authorization_rule_sends" {
+  description = "Boolean flag list which describes the does the authorization rule have permission to send to the eventhub? Default to `flase`."
+  type        = list(string)
+  default     = [false]
+}
+
+variable "eventhub_authorization_rule_manages" {
+  description = "Boolean flag list which describes does this authorization rule have permission to manage to the event hub? when this property is `true`- both `listen` and `send` must be too. Default to `false`."
+  type        = list(string)
+  default     = [false]
+}
+
+###
+# Event-hub consumer group
+###
+
+variable "consumer_group_enabled" {
+  description = "Boolean flag which describes whether or not to enable the eventhub consumer group."
+  type        = bool
+  default     = false
+}
+
+variable "consumer_group_names" {
+  description = "List of names of the eventhub consumer group resource. Changing this forces a new resource to be created. If enabled value is `Required`."
+  type        = list(string)
+  default     = [""]
+}
+
+variable "consumer_group_event_hub_names" {
+  description = "The list of names of the eventhub in which consumer groups will be created."
+  type        = list(string)
+  default     = [""]
+}
+
+variable "consumer_group_user_metadatas" {
+  description = "List of user metadata."
+  type        = list(string)
+  default     = [""]
 }

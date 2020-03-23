@@ -3,7 +3,7 @@
 ###
 
 resource "azurerm_eventhub_namespace" "this_namespace" {
-  count = var.enabled ? 1 : 0
+  count = local.should_create_event_hub_namespace ? 1 : 0
 
   name                     = var.eventhub_namespace_name
   resource_group_name      = var.resource_group_name
