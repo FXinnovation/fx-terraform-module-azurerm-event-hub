@@ -64,8 +64,8 @@ variable "eventhub_namespace_maximum_throughput_units" {
 }
 
 variable "network_rulesets" {
-  description = "One or more network rulesets."
-  type        = list(object({ defaul_action = string, ip_rules = list(string), subnet_ids = list(string), ignore_missing_virtual_network_service_endpoint = bool }))
+  description = "One or more network rulesets.Network rulesets cannot be used be when sku is set to `Basic`"
+  type        = list(object({ default_action = string, ip_mask = string, subnet_id = string, ignore_missing_virtual_network_service_endpoint = bool }))
   default     = null
 }
 
@@ -125,12 +125,6 @@ variable "namespace_authorization_rule_manages" {
 variable "event_hub_enabled" {
   description = "Boolean flag which describes whether to enable the eventub resource or not."
   default     = false
-}
-
-variable "event_hub_count" {
-  description = "The number of eventhun which will be deployed using this module. If enabled value is `Required`."
-  type        = number
-  default     = 1
 }
 
 variable "event_hub_names" {
@@ -221,7 +215,7 @@ variable "authorization_rule_event_hub_names" {
   default     = [""]
 }
 
-variable "eventhub_authorization_rule_listen" {
+variable "eventhub_authorization_rule_listens" {
   description = "List of boolean flag which describes the authorization rule have permissions to listen to eventhub? Defaults to `false`."
   type        = list(bool)
   default     = [false]
@@ -271,7 +265,7 @@ variable "consumer_group_event_hub_names" {
 variable "consumer_group_user_metadatas" {
   description = "List of user metadata."
   type        = list(string)
-  default     = [""]
+  default     = ["FX"]
 }
 
 ###

@@ -11,7 +11,7 @@ output "eventhub_namespace_id" {
 # Event-hub namespace authorization rules
 ###
 
-output "namesapce_authorization_rule_ids" {
+output "namespace_authorization_rule_ids" {
   description = "IDs of the namespace authorization rules."
   value       = compact(concat(azurerm_eventhub_namespace_authorization_rule.this.*.id, [""]))
 }
@@ -47,7 +47,7 @@ output "event_hub_ids" {
 
 output "event_hub_partition_ids" {
   description = "Identifiers for partitions created for the eventhub."
-  value       = compact(concat(azurerm_eventhub.this.*.partition_ids, [""]))
+  value       = azurerm_eventhub.this.*.partition_ids
 }
 
 ###

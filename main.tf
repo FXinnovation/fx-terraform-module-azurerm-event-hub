@@ -14,7 +14,7 @@ resource "azurerm_eventhub_namespace" "this_namespace" {
   maximum_throughput_units = var.eventhub_namespace_auto_inflate_enabled != false ? var.eventhub_namespace_maximum_throughput_units : null
 
   dynamic "network_rulesets" {
-    for_each = var.network_rulesets
+    for_each = var.eventhub_namespace_sku != "Basic" ? var.network_rulesets : []
     content {
       default_action = network_rulesets.value.default_action
 
@@ -23,7 +23,7 @@ resource "azurerm_eventhub_namespace" "this_namespace" {
         action  = "Allow"
       }
       virtual_network_rule {
-        subnet_id                                       = network_rulesets.value.subnet_ids
+        subnet_id                                       = network_rulesets.value.subnet_id
         ignore_missing_virtual_network_service_endpoint = network_rulesets.value.ignore_missing_virtual_network_service_endpoint
       }
     }
@@ -46,7 +46,7 @@ resource "azurerm_eventhub_namespace_authorization_rule" "this" {
   count = local.should_create_namespace_authorization_rule ? length(var.namespace_authorization_rule_names) : 0
 
   name                = element(var.namespace_authorization_rule_names, count.index)
-  namespace_name      = var.event_hub_namespace_exist != false ? element(concat(azurerm_eventhub_namespace.this_namespace.*.name, list("")), 0) : element(var.event_hub_existing_namespace_names, count.index)
+  namespace_name      = var.event_hub_namespace_exist == false ? element(concat(azurerm_eventhub_namespace.this_namespace.*.name, list("")), 0) : element(var.event_hub_existing_namespace_names, count.index)
   resource_group_name = var.resource_group_name
   listen              = element(var.namespace_authorization_rule_listens, count.index)
   send                = element(var.namespace_authorization_rule_sends, count.index)
@@ -58,10 +58,10 @@ resource "azurerm_eventhub_namespace_authorization_rule" "this" {
 ###
 
 resource "azurerm_eventhub" "this" {
-  count = local.should_create_event_hubs ? var.event_hub_count : 0
+  count = local.should_create_event_hubs ? length(var.event_hub_names) : 0
 
   name                = element(var.event_hub_names, count.index)
-  namespace_name      = var.event_hub_namespace_exist != false ? element(concat(azurerm_eventhub_namespace.this_namespace.*.name, list("")), 0) : element(var.event_hub_existing_namespace_names, count.index)
+  namespace_name      = var.event_hub_namespace_exist == false ? element(concat(azurerm_eventhub_namespace.this_namespace.*.name, list("")), 0) : element(var.event_hub_existing_namespace_names, count.index)
   resource_group_name = var.resource_group_name
   partition_count     = element(var.event_hub_partititon_counts, count.index)
   message_retention   = element(var.event_hub_message_rententions, count.index)
@@ -98,10 +98,10 @@ resource "azurerm_eventhub_authorization_rule" "this_rule" {
   count = local.should_create_eventhub_authorization_rule ? length(var.eventhub_authorization_rule_names) : 0
 
   name                = element(var.eventhub_authorization_rule_names, count.index)
-  namespace_name      = var.event_hub_namespace_exist != false ? element(concat(azurerm_eventhub_namespace.this_namespace.*.name, list("")), 0) : element(var.event_hub_existing_namespace_names, count.index)
-  eventhub_name       = var.event_hub_count > 1 ? lookup(local.eventhub_name, element(var.authorization_rule_event_hub_names, count.index)) : element(concat(azurerm_eventhub.this.*.name, list("")), 0)
+  namespace_name      = var.event_hub_namespace_exist == false ? element(concat(azurerm_eventhub_namespace.this_namespace.*.name, list("")), 0) : element(var.event_hub_existing_namespace_names, count.index)
+  eventhub_name       = length(var.event_hub_names) > 1 ? lookup(local.eventhub_name, element(var.authorization_rule_event_hub_names, count.index)) : element(concat(azurerm_eventhub.this.*.name, list("")), 0)
   resource_group_name = var.resource_group_name
-  listen              = element(var.eventhub_authorization_rule_listen, count.index)
+  listen              = element(var.eventhub_authorization_rule_listens, count.index)
   send                = element(var.eventhub_authorization_rule_sends, count.index)
   manage              = element(var.eventhub_authorization_rule_manages, count.index)
 }
@@ -114,8 +114,8 @@ resource "azurerm_eventhub_consumer_group" "this" {
   count = local.should_create_consumer_group ? length(var.consumer_group_names) : 0
 
   name                = element(var.consumer_group_names, count.index)
-  namespace_name      = var.event_hub_namespace_exist != false ? element(concat(azurerm_eventhub_namespace.this_namespace.*.name, list("")), 0) : element(var.event_hub_existing_namespace_names, count.index)
-  eventhub_name       = var.event_hub_count > 1 ? lookup(local.eventhub_name, element(var.consumer_group_event_hub_names, count.index)) : element(concat(azurerm_eventhub.this.*.name, var.existing_event_hub_names), count.index)
+  namespace_name      = var.event_hub_namespace_exist == false ? element(concat(azurerm_eventhub_namespace.this_namespace.*.name, list("")), 0) : element(var.event_hub_existing_namespace_names, count.index)
+  eventhub_name       = length(var.event_hub_names) > 1 ? lookup(local.eventhub_name, element(var.consumer_group_event_hub_names, count.index)) : element(concat(azurerm_eventhub.this.*.name, var.existing_event_hub_names), count.index)
   resource_group_name = var.resource_group_name
   user_metadata       = element(var.consumer_group_user_metadatas, count.index)
 

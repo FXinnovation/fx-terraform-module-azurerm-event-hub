@@ -12,7 +12,10 @@ terraform destroy
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Providers
 
-No provider.
+| Name | Version |
+|------|---------|
+| azurerm | >= 1.36.0, < 2.0.0 |
+| random | n/a |
 
 ## Inputs
 
@@ -28,9 +31,9 @@ No provider.
 | Name | Description |
 |------|-------------|
 | consumer\_group\_ids | IDs of the eventhub consumer groups. |
-| eventhub\_authorization\_rule\_ids | the IDs of the eventhub authorization rule. |
-| evevent\_hub\_ids | the IDs of the eventhub. |
-| namespace\_authorization\_rule\_ids | the IDs of the namespace authorization rule. |
+| eventhub\_authorization\_rule\_ids | The IDs of the eventhub authorization rule. |
+| evevent\_hub\_ids | The IDs of the eventhub. |
+| namespace\_authorization\_rule\_ids | The IDs of the namespace authorization rule. |
 | namespace\_id | The ID of the event hub namespace. |
 | reovery\_namespace\_ids | IDs the disater recovery eventhub namespace. |
 

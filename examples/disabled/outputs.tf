@@ -4,17 +4,17 @@ output "namespace_id" {
 }
 
 output "namespace_authorization_rule_ids" {
-  description = "the IDs of the namespace authorization rule."
+  description = "The IDs of the namespace authorization rule."
   value       = module.example.namespace_authorization_rule_ids
 }
 
 output "evevent_hub_ids" {
-  description = "the IDs of the eventhub."
+  description = "The IDs of the eventhub."
   value       = module.example.event_hub_ids
 }
 
 output "eventhub_authorization_rule_ids" {
-  description = "the IDs of the eventhub authorization rule."
+  description = "The IDs of the eventhub authorization rule."
   value       = module.example.eventhub_authorization_rule_ids
 }
 
