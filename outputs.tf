@@ -21,7 +21,7 @@ output "namesapce_authorization_rule_primary_key" {
   value       = compact(concat(azurerm_eventhub_namespace_authorization_rule.this.*.primary_key, [""]))
 }
 
-output "namesapce_authorization_rule_primary_connection string" {
+output "namesapce_authorization_rule_primary_connection_string" {
   description = "The primary connection string for the authorization rules."
   value       = compact(concat(azurerm_eventhub_namespace_authorization_rule.this.*.primary_connection_string, [""]))
 }
@@ -31,7 +31,7 @@ output "namesapce_authorization_rule_secondary_key" {
   value       = compact(concat(azurerm_eventhub_namespace_authorization_rule.this.*.secondary_key, [""]))
 }
 
-output "namesapce_authorization_rule_secondary_connection string" {
+output "namesapce_authorization_rule_secondary_connection_string" {
   description = "The secondary connection string for the authorization rules."
   value       = compact(concat(azurerm_eventhub_namespace_authorization_rule.this.*.secondary_connection_string, [""]))
 }
@@ -64,7 +64,7 @@ output "eventhub_authorization_rule_primary_key" {
   value       = compact(concat(azurerm_eventhub_authorization_rule.this_rule.*.primary_key, [""]))
 }
 
-output "eventhub_authorization_rule_primary_connection string" {
+output "eventhub_authorization_rule_primary_connection_string" {
   description = "The primary connection string for the authorization rules."
   value       = compact(concat(azurerm_eventhub_authorization_rule.this_rule.*.primary_connection_string, [""]))
 }
@@ -74,7 +74,7 @@ output "eventhub_authorization_rule_secondary_key" {
   value       = compact(concat(azurerm_eventhub_authorization_rule.this_rule.*.secondary_key, [""]))
 }
 
-output "eventhub_authorization_rule_secondary_connection string" {
+output "eventhub_authorization_rule_secondary_connection_string" {
   description = "The secondary connection string for the authorization rules."
   value       = compact(concat(azurerm_eventhub_authorization_rule.this_rule.*.secondary_connection_string, [""]))
 }
@@ -86,4 +86,13 @@ output "eventhub_authorization_rule_secondary_connection string" {
 output "eventhub_consumer_group_ids" {
   description = "IDs of the eventhub consumer group."
   value       = compact(concat(azurerm_eventhub_consumer_group.this.*.id, [""]))
+}
+
+###
+# Event-hub namespace disaster recovery
+###
+
+output "recovery_eventhub_namespace_ids" {
+  description = "IDs of the eventhub namespace diaster recovery config."
+  value       = compact(concat(azurerm_eventhub_namespace_disaster_recovery_config.this_recovery.*.id, [""]))
 }

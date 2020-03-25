@@ -10,6 +10,7 @@ variable "enabled" {
 variable "resource_group_name" {
   description = "Name of the resource group of the eventhub namespace resources should be exist.Changing this forces a new resource to be created."
   type        = string
+  default     = ""
 }
 
 variable "tags" {
@@ -45,7 +46,7 @@ variable "eventhub_namespace_sku" {
 }
 
 variable "eventhub_namespace_capacitiy" {
-  description = "Specifies the capacity / throughput units for a `Standard` SKU namespace. Valid values range from `1`-`20`."
+  description = "Specifies the capacity/throughput units for a `Standard` SKU namespace. Valid values range from `1`-`20`."
   type        = number
   default     = 5
 }
@@ -62,9 +63,9 @@ variable "eventhub_namespace_maximum_throughput_units" {
   default     = 5
 }
 
-variable "network_rules" {
-  description = "Network rules restricing access to the event hub."
-  type        = object({ ip_rules = list(string), subnet_ids = list(string) })
+variable "network_rulesets" {
+  description = "One or more network rulesets."
+  type        = list(object({ defaul_action = string, ip_rules = list(string), subnet_ids = list(string), ignore_missing_virtual_network_service_endpoint = bool }))
   default     = null
 }
 
@@ -80,6 +81,17 @@ variable "eventhub_namespace_tags" {
 variable "namespace_authorization_rule_enabled" {
   description = "Boolean flag which describes whether to enable the namespace authorization rules or not."
   default     = false
+}
+
+variable "event_hub_namespace_exist" {
+  description = "Boolean flag which describes whether the namespace is already existing or not."
+  default     = false
+}
+
+variable "event_hub_existing_namespace_names" {
+  description = "List of names of existing eventhub namespaces.Changing this forces a new resource to be created. If `event_hub_namespace_exist` enabled then value is `Required`."
+  type        = list(string)
+  default     = []
 }
 
 variable "namespace_authorization_rule_names" {
@@ -237,6 +249,13 @@ variable "consumer_group_enabled" {
   default     = false
 }
 
+variable "existing_event_hub_names" {
+  description = "The list of names of existing eventhubs. Changing forces a new to be created."
+  type        = list(string)
+  default     = []
+}
+
+
 variable "consumer_group_names" {
   description = "List of names of the eventhub consumer group resource. Changing this forces a new resource to be created. If enabled value is `Required`."
   type        = list(string)
@@ -251,6 +270,51 @@ variable "consumer_group_event_hub_names" {
 
 variable "consumer_group_user_metadatas" {
   description = "List of user metadata."
+  type        = list(string)
+  default     = [""]
+}
+
+###
+# Event-hub namespace disaster recovery
+###
+
+variable "event_hub_namespace_recovery_enabled" {
+  description = "Boolean flag which describes whether or not enable recovery config for eventhub namespace."
+  default     = false
+}
+
+variable "event_hub_namespace_recovery_names" {
+  description = "List of names of the disaster recovery config. Changing this forces a new resource to be created."
+  type        = list(string)
+  default     = [null]
+}
+
+variable "event_hub_namesapce_disaster_recovery_exist" {
+  description = "Boolean flag which the describes whether the eventhub namespace for which disaster recovery config will be setup already exist or not."
+  default     = false
+}
+
+variable "event_hub_existing_namesapce_disaster_recovery_names" {
+  description = "The list of names of existing eventhub namespace. Changing this will force a new recovery config to be cretaed. If `event_hub_namesapce_disaster_recovery_exist` is enabled then this value is `Required`."
+  type        = list(string)
+  default     = [""]
+}
+
+
+variable "event_hub_recovery_namespace_names" {
+  description = "List of names of eventhub namespaces to which disaster recovery config is done.Changing this forces a new resource to be created."
+  type        = list(string)
+  default     = [""]
+}
+
+variable "event_hub_namespace_recovery_partner_namespace_ids" {
+  description = "The list of IDs of the eventhub namespace to replicate to."
+  type        = list(string)
+  default     = [""]
+}
+
+variable "event_hub_namespace_alternate_names" {
+  description = "List of alternate names to use when the diaster recovery config's name is the same as replicated namespace names."
   type        = list(string)
   default     = [""]
 }
