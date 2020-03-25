@@ -25,7 +25,7 @@ resource "azurerm_subnet" "subnet" {
 }
 
 module "example" {
-  source = "../test/module"
+  source = "../.."
 
   event_hub_namespace_enabled  = true
   eventhub_namespace_name      = "tftest${random_string.this.result}"
