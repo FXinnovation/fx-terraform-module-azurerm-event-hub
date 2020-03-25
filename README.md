@@ -3,6 +3,9 @@
 ## Usage
 See `examples` folders for usage of this module.
 
+## Limitation
+- Any call of this module will create resources in a single resource group.
+
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Providers
 
@@ -32,7 +35,7 @@ See `examples` folders for usage of this module.
 | event\_hub\_existing\_namesapce\_disaster\_recovery\_names | The list of names of existing eventhub namespace. Changing this will force a new recovery config to be cretaed. If `event_hub_namesapce_disaster_recovery_exist` is enabled then this value is `Required`. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
 | event\_hub\_existing\_namespace\_names | List of names of existing eventhub namespaces.Changing this forces a new resource to be created. If `event_hub_namespace_exist` enabled then value is `Required`. | `list(string)` | `[]` | no |
 | event\_hub\_message\_rententions | The list of number of days to retain the events for this eventhub. Needs to be between 1 and 7 days; or 1 day when using a `Basic` SKU for the parent eventhub namespace. | `list(number)` | <pre>[<br>  1<br>]</pre> | no |
-| event\_hub\_names | List of names of the eventhub resource. Chnaging this forces a new resource to be created.If enabled value is `Required`. | `list(string)` | <pre>[<br>  null<br>]</pre> | no |
+| event\_hub\_names | List of names of the eventhub resource. Chnaging this forces a new resource to be created.If enabled value is `Required`. | `list(string)` | `[]` | no |
 | event\_hub\_namesapce\_disaster\_recovery\_exist | Boolean flag which the describes whether the eventhub namespace for which disaster recovery config will be setup already exist or not. | `bool` | `false` | no |
 | event\_hub\_namespace\_alternate\_names | List of alternate names to use when the diaster recovery config's name is the same as replicated namespace names. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
 | event\_hub\_namespace\_enabled | Boolean flag which describes whether or not enable the eventhub namespace. | `bool` | `false` | no |

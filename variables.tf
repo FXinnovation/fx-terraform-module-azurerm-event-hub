@@ -130,7 +130,7 @@ variable "event_hub_enabled" {
 variable "event_hub_names" {
   description = "List of names of the eventhub resource. Chnaging this forces a new resource to be created.If enabled value is `Required`. "
   type        = list(string)
-  default     = [null]
+  default     = []
 }
 
 variable "event_hub_partititon_counts" {
