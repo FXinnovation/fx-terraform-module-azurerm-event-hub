@@ -7,6 +7,13 @@ See `examples` folders for usage of this module.
 - Any call of this module will create resources in a single resource group.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| terraform | >= 0.12 |
+| azurerm | >= 2.0.0 |
+
 ## Providers
 
 | Name | Version |
@@ -16,7 +23,7 @@ See `examples` folders for usage of this module.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | authorization\_rule\_event\_hub\_names | The list of names of the eventhubs to which this authorization rule will be associated. If enabled the value is `Requied`. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
 | capture\_description\_enabled | Boolean flag list which specifies the capture description is enabled or not. | `list(bool)` | <pre>[<br>  false<br>]</pre> | no |
 | capture\_description\_encoding | List of encoding used for the capture description. Possible values are `Avro` and `AvroDeflate`. Value is `Required` if `capture description` is enabled. | `list(string)` | <pre>[<br>  "Avro"<br>]</pre> | no |
@@ -63,7 +70,7 @@ See `examples` folders for usage of this module.
 | namespace\_authorization\_rule\_manages | The list of boolean flags which describes whether to grant send access to authorization rule.When this property is `ture` both `listen` and `send` must be too. Defaults to `false`. | `list(bool)` | <pre>[<br>  false<br>]</pre> | no |
 | namespace\_authorization\_rule\_names | The list which specifies the names of the authorization rule. Changing this forces a new resourece to be created. If enabled value is `Required`. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
 | namespace\_authorization\_rule\_sends | The list of boolean flags which describes whether to grant send access to authorization rule. Defaults to `false`. | `list(bool)` | <pre>[<br>  false<br>]</pre> | no |
-| network\_rulesets | One or more network rulesets.Network rulesets cannot be used be when sku is set to `Basic` | `list(object({ default_action = string, ip_mask = string, subnet_id = string, ignore_missing_virtual_network_service_endpoint = bool }))` | n/a | yes |
+| network\_rulesets | One or more network rulesets.Network rulesets cannot be used be when sku is set to `Basic` | `list(object({ default_action = string, ip_mask = string, subnet_id = string, ignore_missing_virtual_network_service_endpoint = bool }))` | `null` | no |
 | resource\_group\_name | Name of the resource group of the eventhub namespace resources should be exist.Changing this forces a new resource to be created. | `string` | `""` | no |
 | tags | Tags shared by all resources of this module. Will be merged with any other specific tags by resource. | `map` | `{}` | no |
 
