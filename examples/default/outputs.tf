@@ -8,7 +8,7 @@ output "namespace_authorization_rule_ids" {
   value       = module.example.namespace_authorization_rule_ids
 }
 
-output "evevent_hub_ids" {
+output "event_hub_ids" {
   description = "The IDs of the eventhub."
   value       = module.example.event_hub_ids
 }

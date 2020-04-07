@@ -37,8 +37,8 @@ terraform destroy
 | Name | Description |
 |------|-------------|
 | consumer\_group\_ids | IDs of the eventhub consumer groups. |
+| event\_hub\_ids | The IDs of the eventhub. |
 | eventhub\_authorization\_rule\_ids | The IDs of the eventhub authorization rule. |
-| evevent\_hub\_ids | The IDs of the eventhub. |
 | namespace\_authorization\_rule\_ids | The IDs of the namespace authorization rule. |
 | namespace\_id | The ID of the event hub namespace. |
 | reovery\_namespace\_ids | IDs the disater recovery eventhub namespace. |

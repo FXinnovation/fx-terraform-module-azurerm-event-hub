@@ -37,7 +37,7 @@ See `examples` folders for usage of this module.
 | destination\_blob\_container\_names | The list of names of the conatianers within the blob storage account where message should be archived. If the `destination` block is enabled this value is `Required`. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
 | destination\_names | The list of names of  the Destination where the capture should take place. At this time the only supported value is `EventHubArchive.AzureBlockBlob`. If the `destination` is blocke is enabled value is `Required`. | `list(string)` | <pre>[<br>  "EventHubArchive.AzureBlockBlob"<br>]</pre> | no |
 | destination\_storage\_account\_ids | The list of IDs of the blob storage account where messages should be archived.If the `destination` block is enabled this value is `Required`. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
-| enabled | Enable or diasble module. | `bool` | `true` | no |
+| enabled | Enable or disable module. | `bool` | `true` | no |
 | event\_hub\_enabled | Boolean flag which describes whether to enable the eventub resource or not. | `bool` | `false` | no |
 | event\_hub\_existing\_namesapce\_disaster\_recovery\_names | The list of names of existing eventhub namespace. Changing this will force a new recovery config to be cretaed. If `event_hub_namesapce_disaster_recovery_exist` is enabled then this value is `Required`. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
 | event\_hub\_existing\_namespace\_names | List of names of existing eventhub namespaces.Changing this forces a new resource to be created. If `event_hub_namespace_exist` enabled then value is `Required`. | `list(string)` | `[]` | no |
@@ -87,11 +87,11 @@ See `examples` folders for usage of this module.
 | eventhub\_authorization\_rule\_secondary\_key | The secondary keys for the authorization rules. |
 | eventhub\_consumer\_group\_ids | IDs of the eventhub consumer group. |
 | eventhub\_namespace\_id | The ID of the event hub namespace. |
-| namesapce\_authorization\_rule\_primary\_connection\_string | The primary connection string for the authorization rules. |
 | namesapce\_authorization\_rule\_primary\_key | The primary keys for the authorization rules. |
-| namesapce\_authorization\_rule\_secondary\_connection\_string | The secondary connection string for the authorization rules. |
-| namesapce\_authorization\_rule\_secondary\_key | The secondary keys for the authorization rules. |
 | namespace\_authorization\_rule\_ids | IDs of the namespace authorization rules. |
+| namespace\_authorization\_rule\_primary\_connection\_string | The primary connection string for the authorization rules. |
+| namespace\_authorization\_rule\_secondary\_connection\_string | The secondary connection string for the authorization rules. |
+| namespace\_authorization\_rule\_secondary\_key | The secondary keys for the authorization rules. |
 | recovery\_eventhub\_namespace\_ids | IDs of the eventhub namespace diaster recovery config. |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

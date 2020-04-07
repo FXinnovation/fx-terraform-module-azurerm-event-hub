@@ -3,7 +3,7 @@
 ###
 
 variable "enabled" {
-  description = "Enable or diasble module."
+  description = "Enable or disable module."
   default     = true
 }
 

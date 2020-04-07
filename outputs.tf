@@ -18,22 +18,22 @@ output "namespace_authorization_rule_ids" {
 
 output "namesapce_authorization_rule_primary_key" {
   description = "The primary keys for the authorization rules."
-  value       = compact(concat(azurerm_eventhub_namespace_authorization_rule.this.*.primary_key, [""]))
+  value       = element(concat(azurerm_eventhub_namespace_authorization_rule.this.*.primary_key, [""]), 0)
 }
 
-output "namesapce_authorization_rule_primary_connection_string" {
+output "namespace_authorization_rule_primary_connection_string" {
   description = "The primary connection string for the authorization rules."
-  value       = compact(concat(azurerm_eventhub_namespace_authorization_rule.this.*.primary_connection_string, [""]))
+  value       = element(concat(azurerm_eventhub_namespace_authorization_rule.this.*.primary_connection_string, [""]), 0)
 }
 
-output "namesapce_authorization_rule_secondary_key" {
+output "namespace_authorization_rule_secondary_key" {
   description = "The secondary keys for the authorization rules."
-  value       = compact(concat(azurerm_eventhub_namespace_authorization_rule.this.*.secondary_key, [""]))
+  value       = element(concat(azurerm_eventhub_namespace_authorization_rule.this.*.secondary_key, [""]), 0)
 }
 
-output "namesapce_authorization_rule_secondary_connection_string" {
+output "namespace_authorization_rule_secondary_connection_string" {
   description = "The secondary connection string for the authorization rules."
-  value       = compact(concat(azurerm_eventhub_namespace_authorization_rule.this.*.secondary_connection_string, [""]))
+  value       = element(concat(azurerm_eventhub_namespace_authorization_rule.this.*.secondary_connection_string, [""]), 0)
 }
 
 ###
@@ -61,22 +61,22 @@ output "eventhub_authorization_rule_ids" {
 
 output "eventhub_authorization_rule_primary_key" {
   description = "The primary keys for the authorization rules."
-  value       = compact(concat(azurerm_eventhub_authorization_rule.this_rule.*.primary_key, [""]))
+  value       = element(concat(azurerm_eventhub_authorization_rule.this_rule.*.primary_key, [""]), 0)
 }
 
 output "eventhub_authorization_rule_primary_connection_string" {
   description = "The primary connection string for the authorization rules."
-  value       = compact(concat(azurerm_eventhub_authorization_rule.this_rule.*.primary_connection_string, [""]))
+  value       = element(concat(azurerm_eventhub_authorization_rule.this_rule.*.primary_connection_string, [""]), 0)
 }
 
 output "eventhub_authorization_rule_secondary_key" {
   description = "The secondary keys for the authorization rules."
-  value       = compact(concat(azurerm_eventhub_authorization_rule.this_rule.*.secondary_key, [""]))
+  value       = element(concat(azurerm_eventhub_authorization_rule.this_rule.*.secondary_key, [""]), 0)
 }
 
 output "eventhub_authorization_rule_secondary_connection_string" {
   description = "The secondary connection string for the authorization rules."
-  value       = compact(concat(azurerm_eventhub_authorization_rule.this_rule.*.secondary_connection_string, [""]))
+  value       = element(concat(azurerm_eventhub_authorization_rule.this_rule.*.secondary_connection_string, [""]), 0)
 }
 
 ###
